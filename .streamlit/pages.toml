@@ -1,0 +1,24 @@
+[[pages]]
+path = "about.py"
+name = "Home"
+icon = "🐾"
+
+[[pages]]
+path = "ingest_ui.py"
+name = "Ingestion Pipeline"
+icon = "🚀"
+
+[[pages]]
+path = "core/validate.py"
+name = "Validation"
+icon = "✏️"
+
+[[pages]]
+path = "app/species_detection_ui.py"
+name = "Species Detection"
+icon = "🧬"
+
+[[pages]]
+path = "search_ui.py"
+name = "Exploration / Search"
+icon = "🔍"

@@ -1,0 +1,9 @@
+[server]
+fileWatcherType = "none"
+runOnSave = false
+
+[client]
+showErrorDetails = "type"
+
+[logger]
+level = "error"

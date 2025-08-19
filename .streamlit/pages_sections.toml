@@ -1,0 +1,73 @@
+[server]
+fileWatcherType = "none"
+
+[[pages]]
+path = "app/about.py"
+name = "Home"
+icon = "🐾"
+
+[[pages]]
+path = "app/ingest_ui.py"
+name = "Ingestion Pipeline"
+icon = "🚀"
+
+[[pages]]
+path = "app/validate_ui.py"
+name = "Validation"
+icon = "✏️"
+
+[[pages]]
+path = "app/speciesnet_trainer_ui.py"
+name = "Model Training"
+icon = "🐺️"
+
+[[pages]]
+path = "app/speciesnet_predict_ui.py"
+name = "Model Predict"
+icon = "🤯"
+
+[[pages]]
+name = "Analysis"
+icon = ""
+is_section = true
+
+[[pages]]
+path = "app/analysis_ui.py"
+name = "Analysis Explorer"
+icon = "📊"
+
+[[pages]]
+path = "app/semantic_search_ui.py"
+name = "Exploration / Search"
+icon = "🔍"
+
+[[pages]]
+name = "Tools"
+icon = ""
+is_section = true
+
+[[pages]]
+path = "tools/load_metadata.py"
+name = "Load Wildlife Metadata"
+icon = "🛠️"
+
+[[pages]]
+name = "Appendix"
+icon = ""
+is_section = true
+
+[[pages]]
+path = "appendix/project.py"
+name = "Project Overview"
+icon = "📖"
+
+[[pages]]
+path = "appendix/workflow.py"
+name = "Complete Wildlife Image Processing Workflow"
+icon = "📖"
+
+[[pages]]
+path = "appendix/references.py"
+name = "Credits"
+icon = ""
+
