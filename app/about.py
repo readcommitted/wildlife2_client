@@ -31,6 +31,14 @@ from tools.spaces import generate_signed_url
 def get_cached_signed_url(remote_path: str) -> str:
     return generate_signed_url(remote_path)
 
+with st.expander("Purpose of this demo"):
+    st.markdown(
+        """
+        - Head over to the **Analysis Explorer** tab to see embeddings and multi-model comparisons.
+        - Try the **Model Predict** tab to see how the custom **SpeciesNet** model performs, trained on our own images.
+        - Some heavy features (YOLO cropping, large datasets, full UMAP) are disabled here for stability.
+        """
+    )
 
 # --- Page Title and Project Description ---
 st.title("Wildlife Image Processing & Semantic Search System")

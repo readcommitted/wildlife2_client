@@ -41,14 +41,6 @@ st.set_page_config(
 if APP_MODE.lower() == "demo":
     st.warning("DEMO MODE: running on 1 GB RAM and a shared CPU. Please be patient.")
 
-    with st.expander("Purpose of this demo"):
-        st.markdown(
-            """
-            - Head over to the **Analysis Explorer** tab to see embeddings and multi-model comparisons.
-            - Try the **Model Predict** tab to see how the custom **SpeciesNet** model performs, trained on our own images.
-            - Some heavy features (YOLO cropping, large datasets, full UMAP) are disabled here for stability.
-            """
-        )
 
 # --- Sidebar toggle to choose between flat pages or grouped sections ---
 sections = st.sidebar.toggle(
