@@ -146,8 +146,6 @@ with st.expander(f"See trained species list ({num_classes})", expanded=False):
     left.write("\n".join(f"• {n}" for n in class_names[:mid]))
     right.write("\n".join(f"• {n}" for n in class_names[mid:]))
 
-st.info("Tip: Upload a photo that contains **one of the species above** for the best results.")
-
 # --- Load classifier ---------------------------------------------------------
 try:
     model = load_model(model_path, num_classes=num_classes, device=device)
