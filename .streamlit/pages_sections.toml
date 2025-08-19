@@ -57,6 +57,11 @@ icon = ""
 is_section = true
 
 [[pages]]
+path = "appendix/architecture.py"
+name = "Architecture"
+icon = ""
+
+[[pages]]
 path = "appendix/project.py"
 name = "Project Overview"
 icon = ""
