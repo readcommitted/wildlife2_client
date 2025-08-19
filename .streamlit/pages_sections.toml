@@ -62,13 +62,18 @@ name = "Architecture"
 icon = ""
 
 [[pages]]
+path = "appendix/langgraph.py"
+name = "Multi-Model Arbitration"
+icon = ""
+
+[[pages]]
 path = "appendix/project.py"
 name = "Project Overview"
 icon = ""
 
 [[pages]]
 path = "appendix/workflow.py"
-name = "Complete Wildlife Image Processing Workflow"
+name = "Processing Workflow"
 icon = ""
 
 [[pages]]

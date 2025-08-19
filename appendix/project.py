@@ -24,7 +24,7 @@ Dependencies:
 import streamlit as st
 
 # --- Project Overview Section ---
-with st.expander("🔍 Project Overview"):
+with st.expander("Project Overview"):
     st.write("""
    This project, **Wildlife Vision 2**, is an automated wildlife image processing and semantic search system.  
 It streamlines the ingestion, classification, and retrieval of wildlife photographs — helping researchers, photographers, and enthusiasts manage large image collections with less manual effort.
@@ -117,28 +117,6 @@ with st.expander("User Guide"):
     5. Use Ad-Hoc for identifying unknown species.
     """)
 
-# --- Current Limitations Section ---
-with st.expander("Current Limitations"):
-    st.write("""
-    - Species detection accuracy depends on the model (SpeciesNet).
-    - Some images may lack EXIF metadata, affecting automatic tags.
-    - Search may not be perfect for very obscure queries.
-    - User-provided annotations can vary in quality.
-    """)
 
-# --- Future Plans Section ---
-with st.expander("🚀 Future Plans"):
-    st.write("""
-- **Improve species detection** with more advanced and balanced models (e.g., larger CNNs, transformers, fine-tuned YOLO).  
-- **Enhance semantic search performance and accuracy** by blending embeddings, geospatial, and color features.  
-- **Add support for more species and image formats** (expanding coverage across mammals, birds, and beyond).  
-- **Automate model retraining** using collected annotations and new ingestion data.  
-- **Expand geospatial intelligence** with richer park/region polygons, seasonal ranges, and migration patterns.  
-- **Integrate trust & explainability features** (confidence scoring, model comparison, and rationale).  
-- **Multi-model fusion & orchestration**: leverage LangGraph + MCP to coordinate CNN, YOLO, embeddings, and LLM reasoning.  
-- **Enable offline/edge workflows** with the Dockerized desktop app for field use where cloud access is limited.  
-- **Broaden visualization tools** (e.g., UMAP/cluster maps, embedding space explorers, CLIP distance comparisons).  
-- **Continuous data sync & backup** between local desktop and cloud canonical models with WAL archiving and snapshot management.  
-- **Community & collaboration layer**: allow multiple users to share, validate, and contribute species data.  
 
-    """)
+

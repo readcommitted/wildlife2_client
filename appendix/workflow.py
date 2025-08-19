@@ -22,13 +22,11 @@ This visual workflow serves as:
 Dependencies:
 - Streamlit for interactive UI
 
-Author: Matt Scardino
-Project: Wildlife Vision System
 """
 
 import streamlit as st
 
-# --- 1️⃣ Species Embedding Preloading ---
+# --- Species Embedding Preloading ---
 with st.expander("1️⃣ Preload Species Embeddings (Offline)"):
     st.markdown("""
 - **Trigger:** Manual or scheduled (ad-hoc).
@@ -40,7 +38,7 @@ with st.expander("1️⃣ Preload Species Embeddings (Offline)"):
 - **Purpose:** Pre-generated reference vectors enable immediate recognition even for unseen species.
     """)
 
-# --- 2️⃣ Image Ingestion ---
+# --- Image Ingestion ---
 with st.expander("2️⃣ Image Ingestion (Real-time or Batch)"):
     st.markdown("""
 - **Trigger:** New images uploaded to the raw folder.
@@ -53,7 +51,7 @@ with st.expander("2️⃣ Image Ingestion (Real-time or Batch)"):
 - **Purpose:** Standardize and enrich image data for downstream tasks.
     """)
 
-# --- 3️⃣ Species Identification ---
+# --- Species Identification ---
 with st.expander("3️⃣ Species Identification (Dynamic, Intelligent)"):
     st.markdown("""
 - **Trigger:** Immediately after ingestion.
@@ -66,7 +64,7 @@ with st.expander("3️⃣ Species Identification (Dynamic, Intelligent)"):
 - **Purpose:** Combine fast vector lookup with intelligent fallback classification.
     """)
 
-# --- 4️⃣ Annotation and Tagging ---
+# --- Annotation and Tagging ---
 with st.expander("4️⃣ Annotation and Tagging (Manual & Automated)"):
     st.markdown("""
 - **Trigger:** After species identification or on demand.
@@ -77,7 +75,7 @@ with st.expander("4️⃣ Annotation and Tagging (Manual & Automated)"):
 - **Purpose:** Enhance data quality and collect labeled examples for model retraining.
     """)
 
-# --- 5️⃣ Similarity Search ---
+# --- Similarity Search ---
 with st.expander("5️⃣ Similarity Search (Advanced Analysis)"):
     st.markdown("""
 - **Trigger:** User-initiated from Tools or Analysis section.
@@ -88,7 +86,7 @@ with st.expander("5️⃣ Similarity Search (Advanced Analysis)"):
 - **Purpose:** Enable reverse image search and visual discovery.
     """)
 
-# --- 6️⃣ Analysis and Reporting ---
+# --- Analysis and Reporting ---
 with st.expander("6️⃣ Analysis and Reporting (Insights)"):
     st.markdown("""
 - **Trigger:** User-initiated from Tools or Dashboard.
