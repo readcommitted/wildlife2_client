@@ -6,8 +6,6 @@
 # - Multi-crop selection UI if YOLO returns several boxes
 # - Thumbnail + crop preview, then prediction
 
-from datetime import datetime
-from pathlib import Path
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -21,16 +19,21 @@ from pathlib import Path
 import requests
 from tools.spaces import list_objects, generate_signed_url  # uses your existing module
 from db.db import SessionLocal
+from config.settings import APP_MODE
 
 
 # --- YOLO integration (your module) -----------------------------------------
 # Your yolo_detector.py returns: List[(crop_img, label, (x1,y1,x2,y2))] or a single full-image fallback
 try:
-    from tools.yolo_detector import YOLODetector  # <-- your wrapper
-    YOLO_OK = True
+    if APP_MODE.lower() == "demo":
+        YOLO_OK = False
+        YOLODetector = None
+    else:
+        from tools.yolo_detector import YOLODetector
+        YOLO_OK = True
 except Exception:
     YOLO_OK = False
-    YOLODetector = None  # type: ignore
+    YOLODetector = None
 
 st.caption("Upload an image and score it with your latest trained SpeciesNet model.")
 
@@ -213,24 +216,32 @@ if uploaded:
 
     crop_candidates: list[tuple[Image.Image, str, tuple[int,int,int,int]]] = []
 
-    if crop_method == "YOLO detector (recommended)":
-        if YOLO_OK:
-            det = get_yolo()
-            try:
-                crop_candidates = det.detect_and_crop(img, conf_threshold=yolo_conf)  # [(crop, label, bbox), ...]
-            except Exception as e:
-                st.warning(f"YOLO failed ({e}). Falling back to center-crop.")
-        else:
-            st.info("YOLO not available in this environment. Using center-crop fallback.")
-
-    if not crop_candidates:
-        if crop_method == "Smart center-crop":
-            crop_candidates = [(smart_center_crop(img), "center", (0, 0, *img.size))]
-        elif crop_method == "No crop (full image)":
+    if APP_MODE.lower() == "demo":
+        # Cheap + predictable behavior for demo
+        if crop_method == "No crop (full image)":
             crop_candidates = [(img, "full", (0, 0, img.width, img.height))]
         else:
-            # YOLO requested but returned nothing: try center-crop
-            crop_candidates = [(smart_center_crop(img), "center-fallback", (0, 0, *img.size))]
+            # default to smart center-crop in demo
+            crop_candidates = [(smart_center_crop(img), "center", (0, 0, img.width, img.height))]
+    else:
+        if crop_method == "YOLO detector (recommended)":
+            if YOLO_OK:
+                det = get_yolo()
+                try:
+                    crop_candidates = det.detect_and_crop(img, conf_threshold=yolo_conf)  # [(crop, label, bbox), ...]
+                except Exception as e:
+                    st.warning(f"YOLO failed ({e}). Falling back to center-crop.")
+            else:
+                st.info("YOLO not available in this environment. Using center-crop fallback.")
+
+        if not crop_candidates:
+            if crop_method == "Smart center-crop":
+                crop_candidates = [(smart_center_crop(img), "center", (0, 0, *img.size))]
+            elif crop_method == "No crop (full image)":
+                crop_candidates = [(img, "full", (0, 0, img.width, img.height))]
+            else:
+                # YOLO requested but returned nothing: try center-crop
+                crop_candidates = [(smart_center_crop(img), "center-fallback", (0, 0, *img.size))]
 
     # Choose best crop (largest area preselected)
     if len(crop_candidates) > 1:
@@ -238,7 +249,7 @@ if uploaded:
         default_idx = int(np.argmax(areas))
         crop_labels = [f"{i+1}: {lbl} [{bbox[2]-bbox[0]}×{bbox[3]-bbox[1]}]" for i, (_, lbl, bbox) in enumerate(crop_candidates)]
         sel_idx = st.selectbox("Multiple crops found — pick one to classify", options=list(range(len(crop_candidates))),
-                               index=default_idx, format_func=lambda i: crop_labels[i])
+                                   index=default_idx, format_func=lambda i: crop_labels[i])
     else:
         sel_idx = 0
 
