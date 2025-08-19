@@ -190,7 +190,7 @@ def train_and_evaluate_speciesnet(
     class_names = [val_ds.inverse_label_map[i] for i in range(len(val_ds.inverse_label_map))]
     eval_out = evaluate(model, val_loader, device, class_names)
 
-    # --- Step 9: Save model to disk (under MEDIA_ROOT so it persists in your mount) ---
+    # --- Step 9: Save model to disk ---
 
 
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")

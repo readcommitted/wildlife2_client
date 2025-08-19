@@ -2,7 +2,7 @@
 # ---------------------------------------------------------------------------
 # Adds:
 # - Display of trained species list from the selected run
-# - Optional auto-cropping via your YOLODetector (or smart center-crop / none)
+# - Optional auto-cropping via YOLODetector (or smart center-crop / none)
 # - Multi-crop selection UI if YOLO returns several boxes
 # - Thumbnail + crop preview, then prediction
 
@@ -17,13 +17,13 @@ from sqlalchemy import text
 from io import BytesIO
 from pathlib import Path
 import requests
-from tools.spaces import list_objects, generate_signed_url  # uses your existing module
+from tools.spaces import list_objects, generate_signed_url
 from db.db import SessionLocal
 from config.settings import APP_MODE
 
 
-# --- YOLO integration (your module) -----------------------------------------
-# Your yolo_detector.py returns: List[(crop_img, label, (x1,y1,x2,y2))] or a single full-image fallback
+# --- YOLO integration -----------------------------------------
+# yolo_detector.py returns: List[(crop_img, label, (x1,y1,x2,y2))] or a single full-image fallback
 try:
     if APP_MODE.lower() == "demo":
         YOLO_OK = False

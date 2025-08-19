@@ -568,7 +568,6 @@ def llm_arbitrate_fn(state: dict) -> dict:
     resp = client.chat.completions.create(
         model="gpt-4o-mini",
         temperature=0,
-        # If your SDK supports it, this enforces pure JSON:
         # response_format={"type": "json_object"},
         messages=[{"role": "user", "content": prompt}],
     )
@@ -774,7 +773,7 @@ def update_final_fn(state: dict) -> dict:
         """), {
             "image_id": image_id,
             "sid": chosen_id,
-            "conf_pct": final_conf_pct,   # <-- use percent, not raw
+            "conf_pct": final_conf_pct,
             "method": method,
         })
         s.commit()

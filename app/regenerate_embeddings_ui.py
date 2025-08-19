@@ -32,11 +32,11 @@ from tools.species_embeddings import update_species_descriptions
 from config.settings import APP_MODE
 if APP_MODE.lower() == "demo":
     st.title("Demo")
-    st.error("🔒 Not available in the demo.")
+    st.error("Not available in the demo.")
     st.stop()
 
 # --- Streamlit UI Header ---
-st.header("🧠 Embedding Utilities")
+st.header("Embedding Utilities")
 
 # --- Action Buttons Layout ---
 col1, col2, col3, col4 = st.columns([1, 1, 1, 1])

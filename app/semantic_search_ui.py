@@ -85,10 +85,10 @@ try:
         result_limit = st.slider("Max Results", min_value=10, max_value=200, value=50, step=10)
         similarity_threshold = st.slider("Similarity Threshold", 0.5, 1.5, 0.8, 0.05)
 
-        st.markdown("🛠️ Developer Settings")
+        st.markdown("Developer Settings")
         dev_mode = st.checkbox("Enable Developer Mode", value=False)
 
-        if st.button("🔄 Reset Search"):
+        if st.button("Reset Search"):
             st.session_state.search_submitted = False
             st.session_state.last_prompt = ""
             st.session_state.summary_prompt = None

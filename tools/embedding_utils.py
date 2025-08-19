@@ -85,7 +85,6 @@ def get_openclip_model():
 def _resolve_path_if_remote(image_path: Union[str, os.PathLike]) -> str:
     """Download from Spaces only when the path isn’t absolute/local."""
     if isinstance(image_path, str) and not os.path.isabs(image_path):
-        # heuristic for your setup; tweak if you pass 'stage/...' etc.
         return download_from_spaces_to_temp(image_path)
     return str(image_path)
 

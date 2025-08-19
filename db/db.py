@@ -48,23 +48,3 @@ def init_db():
     Base.metadata.create_all(engine)
 
 
-# --- Neo4j Driver Factory ---
-from urllib.parse import urlparse
-from neo4j import GraphDatabase
-
-
-def get_neo4j_driver():
-    """
-    Returns a Neo4j driver instance using NEO4J_URL from settings.
-    Usage: with get_neo4j_driver().session() as session: ...
-    """
-    url = urlparse(NEO4J_URL)
-    scheme = url.scheme      # should be 'bolt'
-    host = url.hostname
-    port = url.port
-    user = url.username
-    password = url.password
-
-    uri = f"{scheme}://{host}:{port}"
-    driver = GraphDatabase.driver(uri, auth=(user, password))
-    return driver

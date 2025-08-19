@@ -212,7 +212,7 @@ def show_processed_images():
             [""] + location_options,
             help="Choose a known location from the list"
         )
-        # At the very top of your page render:
+
         status_placeholder = st.empty()
 
         submit = st.form_submit_button("✅ Update Selected Images")

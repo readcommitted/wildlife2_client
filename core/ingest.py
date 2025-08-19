@@ -185,7 +185,7 @@ def convert_nef_to_jpeg(raw_file, jpeg_path, detector=None):
         bgr_image = cv2.cvtColor(rgb_image, cv2.COLOR_RGB2BGR)
         pil_image = Image.fromarray(cv2.cvtColor(bgr_image, cv2.COLOR_BGR2RGB))
 
-        # ✅ Use passed-in detector if available
+        # Use yolo detector if available
         if detector is None:
             from tools.yolo_detector import YOLODetector  # or from wherever it's defined
             detector = YOLODetector()
@@ -633,10 +633,10 @@ def _write_outputs(local_nef: Path, local_jpeg: Path, date_path: str, filename: 
     raw_dest_dir.mkdir(parents=True, exist_ok=True)
     jpg_dest_dir.mkdir(parents=True, exist_ok=True)
 
-    # ✅ Always copy NEF
+    # Always copy NEF
     shutil.copy2(local_nef, raw_dest_dir / filename)
 
-    # ✅ Only copy JPEG if not already there
+    # Only copy JPEG if not already there
     jpeg_dest_path = jpg_dest_dir / local_jpeg.name
     if local_jpeg.resolve() != jpeg_dest_path.resolve():
         shutil.copy2(local_jpeg, jpeg_dest_path)

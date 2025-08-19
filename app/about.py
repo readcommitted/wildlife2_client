@@ -54,8 +54,6 @@ st.write("")
 # --- Layout for Displaying Example Images ---
 col1, col2, col3 = st.columns([1, 1, 1])
 
-# Optional delay for smoother load experience
-time.sleep(3)
 
 # --- Example 1: Brown Bear ---
 with col1:

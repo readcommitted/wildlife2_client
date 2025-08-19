@@ -53,7 +53,7 @@ def update_species_from_predictions(json_path):
         scores = classifications.get("scores", [])
 
         if not classes or not scores:
-            print(f"⚠️ No classifications found for {filepath}")
+            print(f"No classifications found for {filepath}")
             continue
 
         # Select highest-confidence prediction
@@ -64,7 +64,7 @@ def update_species_from_predictions(json_path):
         # Expected format: class;order;family;genus;species;common_name
         parts = best_class.split(";")
         if len(parts) < 2:
-            print(f"⚠️ Too few parts in SpeciesNet classification: {best_class}")
+            print(f"Too few parts in SpeciesNet classification: {best_class}")
             continue
 
         common_name = parts[-1].strip()
