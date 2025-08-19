@@ -16,8 +16,12 @@ import torch.nn as nn
 from torchvision import models, transforms
 from PIL import Image
 from sqlalchemy import text
-
+from io import BytesIO
+from pathlib import Path
+import requests
+from tools.spaces import list_objects, generate_signed_url  # uses your existing module
 from db.db import SessionLocal
+
 
 # --- YOLO integration (your module) -----------------------------------------
 # Your yolo_detector.py returns: List[(crop_img, label, (x1,y1,x2,y2))] or a single full-image fallback
@@ -151,39 +155,61 @@ except Exception as e:
 preprocess = get_preprocess()
 
 # --- Upload + cropping config -----------------------------------------------
-st.subheader("3) Upload an image to classify")
-uploaded = st.file_uploader("Choose a JPG/PNG image", type=["jpg", "jpeg", "png"])
+st.subheader("3) Choose an image to classify")
 
-crop_method = st.selectbox(
-    "Auto-crop subject before classification",
-    options=[
-        "YOLO detector (recommended)",
-        "Smart center-crop",
-        "No crop (full image)",
-    ],
-    index=0 if YOLO_OK else 1,
-    help="SpeciesNet classifies whatever you pass it. Use YOLO or center-crop to focus on the animal."
+DEMO_PREFIX = "demo/"
+
+@st.cache_data(ttl=60)
+def get_demo_image_keys(prefix: str):
+    keys = list_objects(prefix=prefix) or []
+    valid_ext = (".jpg", ".jpeg", ".png")
+    keys = [k for k in keys if k.lower().endswith(valid_ext)]
+    keys.sort(key=lambda k: k.lower())
+    return keys
+
+image_keys = get_demo_image_keys(DEMO_PREFIX)
+labels = ["-- Select an image --"] + [
+    k[len(DEMO_PREFIX):] if k.startswith(DEMO_PREFIX) else k
+    for k in image_keys
+]
+
+options = ["-- Select an image --"] + image_keys
+choice = st.selectbox(
+    "Select a demo image",
+    options,
+    index=0,
+    format_func=lambda k: (
+        k if k == "-- Select an image --"
+        else (k[len(DEMO_PREFIX):] if k.startswith(DEMO_PREFIX) else k)
+    ),
 )
 
-yolo_conf = st.slider(
-    "YOLO confidence threshold",
-    min_value=0.10, max_value=0.90, value=0.30, step=0.05,
-    help="Detections below this confidence will be ignored."
-)
+uploaded = None
+if choice != "-- Select an image --":
+    selected_key = choice  # already the real key
+    try:
+        url = generate_signed_url(selected_key, expires_in=600)
+        resp = requests.get(url, timeout=30)
+        resp.raise_for_status()
+        uploaded = BytesIO(resp.content)
+        uploaded.name = Path(selected_key).name
+        uploaded.seek(0)
+    except Exception as e:
+        st.error(f"Could not fetch image from Spaces: {e}")
+
+crop_method = "YOLO detector (recommended)"
+yolo_conf = 0.30
 
 if uploaded:
-    # Read image
     try:
         img = Image.open(uploaded).convert("RGB")
     except Exception as e:
         st.error(f"Could not open image: {e}")
         st.stop()
 
-    # Thumbnail + crop(s)
-    th_col, prev_col = st.columns([1,3])
-    with th_col:
-        st.markdown("**Thumbnail**")
-        st.image(img, caption="Original", width=160)
+    # --- Thumbnail only ---
+    st.markdown("**Thumbnail**")
+    st.image(img, caption="Original", width=160)
 
     crop_candidates: list[tuple[Image.Image, str, tuple[int,int,int,int]]] = []
 
@@ -218,9 +244,6 @@ if uploaded:
 
     crop_img, crop_lbl, crop_bbox = crop_candidates[sel_idx]
 
-    with prev_col:
-        st.markdown("**Crop preview**")
-        st.image(crop_img, caption=f"Crop: {crop_lbl}  |  Method: {crop_method}", use_container_width=True)
 
     # --- Inference on chosen crop -------------------------------------------
     with torch.no_grad():

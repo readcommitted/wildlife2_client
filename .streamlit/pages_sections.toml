@@ -59,12 +59,12 @@ is_section = true
 [[pages]]
 path = "appendix/project.py"
 name = "Project Overview"
-icon = "📖"
+icon = ""
 
 [[pages]]
 path = "appendix/workflow.py"
 name = "Complete Wildlife Image Processing Workflow"
-icon = "📖"
+icon = ""
 
 [[pages]]
 path = "appendix/references.py"

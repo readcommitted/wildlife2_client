@@ -129,10 +129,10 @@ def run_clip_label_vs_prediction_analysis():
             "label": true_label,
             "predicted": predicted,
             "confidence score": f"{similarity_to_confidence(score, min_val=0.15, max_val=0.45)}%" if score is not None else None,
-            "match": "✅" if agreement else "❌",
-            "size": size_class,
-            "colors": colors,
-            "top candidates (cosine similarity)": ", ".join(top_candidates)
+            "match": "✅" if agreement else "❌"
+            #"size": size_class,
+            #"colors": colors,
+            #"top candidates (cosine similarity)": ", ".join(top_candidates)
         })
 
     df = pd.DataFrame(results).sort_values(by="image_id", ascending=False)
@@ -142,10 +142,10 @@ def run_clip_label_vs_prediction_analysis():
         "label",
         "predicted",
         "confidence score",
-        "match",
-        "size",
-        "colors",
-        "top candidates (cosine similarity)"
+        "match"
+        #"size",
+        #"colors",
+        #"top candidates (cosine similarity)"
     ]])
 
     correct = sum(r["match"] == "✅" for r in results)
@@ -222,9 +222,9 @@ def run_multimodel_analysis():
             "predicted": predicted,
             "confidence score": species_confidence,
             "match": "✅" if agreement else "❌",
-            "species detection method" : species_detection_method,
-            "size": size_class,
-            "colors": colors
+            "species detection method" : species_detection_method
+            #"size": size_class,
+            #"colors": colors
         })
 
     df = pd.DataFrame(results).sort_values(by="image_id", ascending=False)
@@ -235,9 +235,9 @@ def run_multimodel_analysis():
         "predicted",
         "confidence score",
         "match",
-        "species detection method",
-        "size",
-        "colors"
+        "species detection method"
+        #"size",
+        #"colors"
     ]])
 
     correct = sum(r["match"] == "✅" for r in results)
@@ -275,13 +275,11 @@ def run_multimodel_analysis():
 def display_umap_species_projection():
     """UMAP 2D projection of species and image embeddings with drift detection"""
 
-
-
-    st.subheader("📊 UMAP Species Embedding Visualization")
+    st.subheader("UMAP Species Embedding Visualization")
 
     with SessionLocal() as session:
         # --- Controls ---
-        st.markdown("####About this view")
+        st.markdown("#### About this view")
         with st.expander("What is this?"):
             st.markdown("""
             Visualizes species embeddings from the CLIP model:
@@ -320,7 +318,6 @@ def display_umap_species_projection():
                 FROM eco e
                 JOIN wildlife.regions_flattened rf ON rf.ecoregion_code = e.ecoregion_code
                 ORDER BY e.image_count DESC
-                LIMIT :max_regions
             )
             SELECT ecoregion_code, ecoregion_name, image_count
             FROM ranked

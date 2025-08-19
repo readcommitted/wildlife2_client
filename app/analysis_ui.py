@@ -31,9 +31,6 @@ from core.analysis import (
 )
 
 
-# --- Sidebar Option: Limit Number of Images for Analysis ---
-limit = st.sidebar.slider("Number of Images", 10, 500, 200)
-
 # --- Main Tab Layout for Analysis Tools ---
 tab1, tab2, tab3, tab4 = st.tabs([
     "Multi-Model Prediction",
@@ -59,7 +56,7 @@ with tab2:
 # --- Tab 3: CLIP Region Comparison – South Central Rockies Forests ---
 with tab3:
     st.subheader("CLIP Region Comparison – South Central Rockies Forests")
-    clip_region_comparison(limit)
+    clip_region_comparison(100)
 
 # --- Tab 4: UMAP Species Embedding Projection ---
 with tab4:

@@ -38,6 +38,10 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+if APP_MODE.lower() == "demo":
+    st.error("DEMO MODE: This is a demo only. For the full application contact the developer.")
+
+
 # --- Sidebar toggle to choose between flat pages or grouped sections ---
 sections = st.sidebar.toggle(
     "Sections",
