@@ -64,7 +64,7 @@ The API provides:
  - Embedding-based similarity search via pgvector
  - Species lookup by ecoregion and region codes
  - Tool endpoints designed for LangGraph and AI agent orchestration
-🔌 API Repository: [https://github.com/readcommitted/wildlife_api](https://github.com/readcommitted/wildlife-api)
+ - API Repository: [https://github.com/readcommitted/wildlife_api](https://github.com/readcommitted/wildlife-api)
 
 ---
 
