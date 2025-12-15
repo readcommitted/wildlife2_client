@@ -57,6 +57,17 @@ Contributions, ideas, and feedback are welcome as the system evolves into a more
 
 ---
 
+## 🔌 Wildlife MCP API (Backend Service)
+This project is supported by a companion backend service, the Wildlife MCP API, which powers geospatial queries, vector similarity search, ecoregion-aware species lookups, and agentic workflows.
+The API provides:
+ - Spatial queries using PostGIS
+ - Embedding-based similarity search via pgvector
+ - Species lookup by ecoregion and region codes
+ - Tool endpoints designed for LangGraph and AI agent orchestration
+🔌 API Repository: https://github.com/readcommitted/wildlife_api
+
+---
+
 ## 📖 References & Acknowledgments
 
 This project builds on the work of several key tools, datasets, and communities:
