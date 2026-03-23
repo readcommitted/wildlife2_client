@@ -3,7 +3,7 @@ from pathlib import Path
 
 
 # Path to PNG (relative to repo root)
-img_path = Path(__file__).parent.parent / "assets" / "langgraph.png"
+img_path = "app" / "assets" / "langgraph.png"
 
 if img_path.exists():
     st.image(str(img_path), use_container_width=True, caption="LangGraph Multi-Model Species Identification & Arbitration")
