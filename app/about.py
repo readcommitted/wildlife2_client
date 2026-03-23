@@ -36,7 +36,7 @@ with st.expander("Purpose of this demo"):
         """
         - Head over to the **Analysis Explorer** tab to see embeddings and multi-model comparisons.
         - Try the **Model Predict** tab to see how the custom **SpeciesNet** model performs, trained on our own images.
-        - Some heavy features (YOLO cropping, large datasets, full UMAP) are disabled here for stability.
+        - Some heavy features (Ingestion Pipeline, YOLO cropping, large datasets, full UMAP) are disabled here for stability.
         """
     )
 
