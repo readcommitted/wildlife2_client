@@ -50,7 +50,7 @@ def _sha256(path: Path) -> str:
     return h.hexdigest()
 
 @st.cache_resource(show_spinner=True)
-def load_speciesnet(model_key_or_url: str, expected_sha256: str | None = None):
+def load_speciesnet(model_key_or_url: str, expected_sha256: str | None = None) -> object:
     if DEMO:
         st.info("Demo mode: skipping heavy model load; using stub predictor.")
         return None
