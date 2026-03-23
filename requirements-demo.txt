@@ -1,4 +1,5 @@
-streamlit==1.35.0
+streamlit==1.45.1
+streamlit_folium==0.25.0
 pandas
 numpy
 plotly
