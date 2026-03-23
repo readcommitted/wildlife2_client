@@ -39,7 +39,7 @@ st.set_page_config(
 )
 
 if APP_MODE.lower() == "demo":
-    st.warning("DEMO MODE: running on 1 GB RAM and a shared CPU. Please be patient.")
+    st.warning("DEMO MODE: This is a scaled-down version of the full application running on limited resources (1 GB RAM and shared CPU).")
 
 
 # --- Sidebar toggle to choose between flat pages or grouped sections ---
