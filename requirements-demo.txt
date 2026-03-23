@@ -17,3 +17,8 @@ Pillow
 opencv-python-headless
 st-pages==1.0.1
 python-dotenv
+matplotlib
+langgraph
+open-clip-torch
+ultralytics==8.3.166
+ultralytics-thop==2.0.14
