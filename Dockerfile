@@ -10,7 +10,17 @@ RUN apt-get update && apt-get install -y \
 COPY requirements-demo.txt .
 RUN pip install --no-cache-dir -r requirements-demo.txt
 
-COPY . .
+# Create non-root user
+RUN addgroup --gid 1001 appgroup && \
+    adduser --uid 1001 --gid 1001 --disabled-password --gecos "" appuser
+
+COPY --chown=appuser:appgroup . .
+
+# Pre-compile bytecode
+RUN python -m compileall -q . && \
+    chown -R appuser:appgroup /app
+
+USER appuser
 
 EXPOSE 8501
 
